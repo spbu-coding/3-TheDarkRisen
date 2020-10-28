@@ -13,7 +13,7 @@ struct for_float
 struct for_float solve_float(float delta)
 {
     struct for_float answer_f;
-    answer_f.x2 = (2.0001f + delta - 2) / 0.0001;
+    answer_f.x2 = (2.0001f + delta - 2) * pow(10, 4);
     answer_f.x1 = 2.0000f - answer_f.x2;
 
     return answer_f;
@@ -28,7 +28,7 @@ struct for_double
 struct for_double solve_double(double delta)
 {
     struct for_double answer_d;
-    answer_d.x2 = (2.0001 + delta - 2) / 0.0001;
+    answer_d.x2 = (2.0001 + delta - 2) * pow(10, 4);
     answer_d.x1 = 2.0000 - answer_d.x2;
 
     return answer_d;
@@ -57,8 +57,8 @@ void print() {
 
     printf("\n double_point: x1 = %.20lf x2 = %.20lf", double_points.x1, double_points.x2);
     printf("\n float_point: x1 = %.20f x2 = %.20f", float_points.x1, float_points.x2);
-    float_delta = 0.0000f;
-    double_delta = 0.0000;
+    float_delta = 0.0001f;
+    double_delta = 0.0001;
     do
     {
         printf("\n\n Experiment [%d]", step);
@@ -79,8 +79,8 @@ void print() {
 
         double_delta /= 2.000;
         float_delta /= 2.000f;
-        step++;
-    } while ((distance_double_points != 0) || (distance_float_points > Epsilon_f), step <20);
+        ++step;
+    } while ((distance_double_points != 0) || (distance_float_points > Epsilon_f));
 }
 
 int main(void) {
